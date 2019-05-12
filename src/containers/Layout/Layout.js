@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+
+import TableForm from '../../components/calculatorTable/TableForm'
 
 const styles = {
     root: {
@@ -24,6 +27,7 @@ const styles = {
 function Layout(props) {
     const { classes } = props;
     return (
+        <MuiThemeProvider>
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
@@ -31,12 +35,16 @@ function Layout(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" color="inherit" className={classes.grow}>
-                        News
+                        Basic Calculator
           </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
         </div>
+        <TableForm />
+        </MuiThemeProvider>
+
+
     );
 }
 
