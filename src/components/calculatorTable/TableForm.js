@@ -56,15 +56,44 @@ const styles = theme => ({
 });
 const nums = [
   ['C', '+/-', '%', '←'],
-  [7, 8, 9, 'x'],
+  [7, 8, 9, '*'],
   [4, 5, 6, '-'],
   [1, 2, 3, '+'],
   ['=', 0, '.', '÷']
 ]
+const operators = [ '-', '+', '*', '÷', '%']
 class TableForm extends Component {
   state = {item: ''}
+  changeHandler = (item) => {
+   
+    if(item==='C') this.setState({item: ''})
+    if (item === '←') this.setState({ item: this.state.item.substring(0, this.state.item.length - 1)})
+    if(item==='+/-'){
+      this.state.item.charAt(0) === '-' ? this.setState({item: this.state.item.substring(1, this.state.length)}) : 
+      this.setState({item: '-' + this.state.item})
+    }
+    if (Number.isInteger(item)) {
+      this.setState({ item: this.state.item + item })
+    }
+    if(operators.includes(item)) {
+      if(this.state.item !=='')  {
+      if( !operators.includes(this.state.item.charAt(this.state.item.length-1))) {
+        this.setState({ item: this.state.item + item })
+      }
+      else {
+    this.setState({ item: this.state.item.substring(0, this.state.item.length-1) + item})
+        
+      }
+    }
+  }
+
+  }
+  isValidExpression = (f) => {
+
+  }
   render() {
   const { classes } = this.props;
+  
   return (
     <Paper className={classes.paper}>
       <div className={classes.input} >
@@ -78,8 +107,8 @@ class TableForm extends Component {
               {element.map((item, position) =>
                 <FormControl key={item} >
                   <Fab color='primary' aria-label="Edit"
-                    onClick={() => this.setState({ item: this.state.item + item })}
-                    className={Number.isInteger(item) || item === '.' ? classes.fab : item === '=' || item === '+' || item === '-' || item === '+' || item === 'x' || item === '÷' ? classes.fab3 : classes.fab2}>
+                    onClick={() => this.changeHandler(item)}
+                    className={Number.isInteger(item) || item === '.' ? classes.fab : item === '=' || item === '+' || item === '-' || item === '+' || item === '*' || item === '÷' ? classes.fab3 : classes.fab2}>
                     <Icon
                     
                     >{item}</Icon>
