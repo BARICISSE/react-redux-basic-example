@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
@@ -11,13 +11,8 @@ import { FormControl, List, Paper } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 
 
-const nums = [
-  ['C', '+/-', '%', '←'],
-  [7, 8, 9, 'x'],
-  [4, 5, 6, '-'],
-  [1, 2, 3, '+'],
-  ['=', 0, '.', '÷']
-]
+
+
 
 const styles = theme => ({
   fab: {
@@ -28,7 +23,7 @@ const styles = theme => ({
   fab2: {
     marginRight: theme.spacing.unit,
     marginLeft: theme.spacing.unit,
-    backgroundColor: '#13A6DB'
+    backgroundColor: '#464949'
   },
   fab3: {
     marginRight: theme.spacing.unit,
@@ -59,13 +54,21 @@ const styles = theme => ({
     outline: '1px solid #888888'
   }
 });
-
-function TableForm(props) {
-  const { classes } = props;
+const nums = [
+  ['C', '+/-', '%', '←'],
+  [7, 8, 9, 'x'],
+  [4, 5, 6, '-'],
+  [1, 2, 3, '+'],
+  ['=', 0, '.', '÷']
+]
+class TableForm extends Component {
+  state = {item: ''}
+  render() {
+  const { classes } = this.props;
   return (
     <Paper className={classes.paper}>
-      <div className={classes.input}>
-
+      <div className={classes.input} >
+        {this.state.item}
       </div >
       <div>
 
@@ -75,8 +78,11 @@ function TableForm(props) {
               {element.map((item, position) =>
                 <FormControl key={item} >
                   <Fab color='primary' aria-label="Edit"
+                    onClick={() => this.setState({ item: this.state.item + item })}
                     className={Number.isInteger(item) || item === '.' ? classes.fab : item === '=' || item === '+' || item === '-' || item === '+' || item === 'x' || item === '÷' ? classes.fab3 : classes.fab2}>
-                    <Icon>{item}</Icon>
+                    <Icon
+                    
+                    >{item}</Icon>
                   </Fab>
                 </FormControl>
               )
@@ -87,7 +93,7 @@ function TableForm(props) {
           )}
       </div>
     </Paper>
-  );
+  )};
 }
 
 TableForm.propTypes = {
