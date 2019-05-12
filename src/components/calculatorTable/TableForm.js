@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import { FormControl, List, Paper} from '@material-ui/core';
+import { FormControl, List, Paper } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 
 
@@ -28,7 +28,7 @@ const styles = theme => ({
   fab2: {
     marginRight: theme.spacing.unit,
     marginLeft: theme.spacing.unit,
-    backgroundColor: '#8B13DB'
+    backgroundColor: '#13A6DB'
   },
   fab3: {
     marginRight: theme.spacing.unit,
@@ -44,44 +44,45 @@ const styles = theme => ({
   paper: {
     display: 'inline-block',
     position: 'relative',
-    backgroundColor: 'white'
+    backgroundColor: '#1F2125'
+  },
+  input: {
+    height: '4em',
+    display: 'flex',
+    justifyContent: 'flex - end',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: '1.4em',
+    backgroundColor: '#2E3034',
+    color: '#ffffff',
+    padding: '0.5em',
+    outline: '1px solid #888888'
   }
 });
 
-{/* <Fab color="primary" aria-label="Add" className={classes.fab}>
-  <AddIcon />
-</Fab>
-  <Fab color="secondary" aria-label="Edit" className={classes.fab}>
-    <Icon>1</Icon>
-  </Fab>
-  <Fab variant="extended" aria-label="Delete" className={classes.fab}>
-    <NavigationIcon className={classes.extendedIcon} />
-    Extended
-      </Fab>
-  <Fab disabled aria-label="Delete" className={classes.fab}>
-    <DeleteIcon />
-  </Fab> */}
 function TableForm(props) {
   const { classes } = props;
   return (
     <Paper className={classes.paper}>
-      <div></div>
+      <div className={classes.input}>
+
+      </div >
       <div>
-        
+
         {
           nums.map((element, index) =>
             <List className={classes.List} key={index}>
               {element.map((item, position) =>
                 <FormControl key={item} >
-                  <Fab color='primary' aria-label="Edit" 
-                    className={Number.isInteger(item) || item === '.' ? classes.fab : item === '=' ||item === '+' || item === '-' || item === '+' || item === 'x' || item === '÷' ? classes.fab3 : classes.fab2}>
+                  <Fab color='primary' aria-label="Edit"
+                    className={Number.isInteger(item) || item === '.' ? classes.fab : item === '=' || item === '+' || item === '-' || item === '+' || item === 'x' || item === '÷' ? classes.fab3 : classes.fab2}>
                     <Icon>{item}</Icon>
                   </Fab>
                 </FormControl>
               )
 
               }
-              
+
             </List>
           )}
       </div>
